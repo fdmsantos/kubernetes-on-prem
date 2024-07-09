@@ -1,0 +1,170 @@
+BOX_MEM = ENV['BOX_MEM'] || "1024"
+BOX_CPU = ENV['BOX_CPU'] || "1"
+MASTER_BOX_NAME =  ENV['MASTER_BOX_NAME'] || "k8s-master"
+WORKER_BOX_NAME =  ENV['WORKER_BOX_NAME'] || "k8s-master"
+PROVIDER = ENV['PROVIDER'] || "virtualbox"
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_version ">= 1.8.0"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define :"k8s-master-01" do |k8s_master_01|
+    k8s_master_01.vm.box = MASTER_BOX_NAME
+    k8s_master_01.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_master_01.ssh.shell = "/bin/bash"
+    k8s_master_01.ssh.forward_agent = true
+    k8s_master_01.vm.network :private_network, ip: "192.168.56.2"
+    k8s_master_01.vm.hostname = "k8s-master-01.local"
+    k8s_master_01.vm.provider PROVIDER do |v|
+      v.name = "k8s-master-01"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_master_01.vm.post_up_message = "K8s-master-01 ready!"
+    end
+    k8s_master_01.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+  config.vm.define :"k8s-master-02" do |k8s_master_02|
+    k8s_master_02.vm.box = MASTER_BOX_NAME
+    k8s_master_02.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_master_02.ssh.shell = "/bin/bash"
+    k8s_master_02.ssh.forward_agent = true
+    k8s_master_02.vm.network :private_network, ip: "192.168.56.3"
+    k8s_master_02.vm.hostname = "k8s-master-02.local"
+    k8s_master_02.vm.provider PROVIDER do |v|
+      v.name = "k8s-master-02"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_master_02.vm.post_up_message = "K8s-master-02 ready!"
+    end
+    k8s_master_02.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+  config.vm.define :"k8s-master-03" do |k8s_master_03|
+    k8s_master_03.vm.box = MASTER_BOX_NAME
+    k8s_master_03.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_master_03.ssh.shell = "/bin/bash"
+    k8s_master_03.ssh.forward_agent = true
+    k8s_master_03.vm.network :private_network, ip: "192.168.56.4"
+    k8s_master_03.vm.hostname = "k8s-master-03.local"
+    k8s_master_03.vm.provider PROVIDER do |v|
+      v.name = "k8s-master-03"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_master_03.vm.post_up_message = "K8s-master-03 ready!"
+    end
+    k8s_master_03.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+  config.vm.define :"k8s-worker-01" do |k8s_worker_01|
+    k8s_worker_01.vm.box = WORKER_BOX_NAME
+    k8s_worker_01.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_worker_01.ssh.shell = "/bin/bash"
+    k8s_worker_01.ssh.forward_agent = true
+    k8s_worker_01.vm.network :private_network, ip: "192.168.56.5"
+    k8s_worker_01.vm.hostname = "k8s-worker-01.local"
+    k8s_worker_01.vm.provider PROVIDER do |v|
+      v.name = "k8s-worker-01"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_worker_01.vm.post_up_message = "K8s-worker-01 ready!"
+    end
+    k8s_worker_01.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+  config.vm.define :"k8s-worker-02" do |k8s_worker_02|
+    k8s_worker_02.vm.box = WORKER_BOX_NAME
+    k8s_worker_02.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_worker_02.ssh.shell = "/bin/bash"
+    k8s_worker_02.ssh.forward_agent = true
+    k8s_worker_02.vm.network :private_network, ip: "192.168.56.6"
+    k8s_worker_02.vm.hostname = "k8s-worker-02.local"
+    k8s_worker_02.vm.provider PROVIDER do |v|
+      v.name = "k8s-worker-02"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_worker_02.vm.post_up_message = "K8s-worker-02 ready!"
+    end
+    k8s_worker_02.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+  config.vm.define :"k8s-worker-03" do |k8s_worker_03|
+    k8s_worker_03.vm.box = WORKER_BOX_NAME
+    k8s_worker_03.vm.synced_folder ".", "/vagrant", disabled: false
+    k8s_worker_03.ssh.shell = "/bin/bash"
+    k8s_worker_03.ssh.forward_agent = true
+    k8s_worker_03.vm.network :private_network, ip: "192.168.56.7"
+    k8s_worker_03.vm.hostname = "k8s-worker-03.local"
+    k8s_worker_03.vm.provider PROVIDER do |v|
+      v.name = "k8s-worker-03"
+      v.customize ["modifyvm", :id, "--memory", BOX_MEM]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      v.customize ["modifyvm", :id, "--cpus", BOX_CPU]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      k8s_worker_03.vm.post_up_message = "K8s-worker-03 ready!"
+    end
+    k8s_worker_03.vm.provision :hosts do |provisioner|
+      provisioner.add_host '192.168.56.2', ['k8s-master-01.local', 'k8s-master-01']
+      provisioner.add_host '192.168.56.3', ['k8s-master-02.local', 'k8s-master-02']
+      provisioner.add_host '192.168.56.4', ['k8s-master-03.local', 'k8s-master-03']
+      provisioner.add_host '192.168.56.5', ['k8s-worker-01.local', 'k8s-worker-01']
+      provisioner.add_host '192.168.56.6', ['k8s-worker-02.local', 'k8s-worker-02']
+      provisioner.add_host '192.168.56.7', ['k8s-worker-03.local', 'k8s-worker-03']
+    end
+  end
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+
+end

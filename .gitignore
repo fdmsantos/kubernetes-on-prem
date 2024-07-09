@@ -1,0 +1,6 @@
+# Ignore Vagrant generated files
+.vagrant
+*.log
+
+# Ignore Packer generated files
+/cluster/output-ubuntu/
