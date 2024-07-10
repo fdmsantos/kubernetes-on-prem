@@ -7,3 +7,5 @@ version = 2
                     runtime_type = "io.containerd.runc.v2"
                     [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
                         SystemdCgroup = true
+        [plugins."io.containerd.grpc.v1.cri".sandbox]
+            image = "registry.k8s.io/pause:3.9"

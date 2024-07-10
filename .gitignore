@@ -3,4 +3,5 @@
 *.log
 
 # Ignore Packer generated files
-/cluster/output-ubuntu/
+/cluster/output-master/
+/cluster/output-worker/

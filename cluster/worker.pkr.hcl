@@ -1,4 +1,4 @@
-source "vagrant" "master" {
+source "vagrant" "worker" {
   communicator = "ssh"
   source_path = "bento/ubuntu-22.04"
   provider = "virtualbox"
@@ -6,10 +6,10 @@ source "vagrant" "master" {
 }
 
 build {
-  name = "k8s-master"
-  sources = ["source.vagrant.master"]
+  name = "k8s-worker"
+  sources = ["source.vagrant.worker"]
 
-  # Install Kubelet, Kubeadm and Kubectl
+  # Install Kubelet and Kubeadm
   provisioner "shell" {
     inline = [
       "sudo apt-get update",
@@ -17,8 +17,8 @@ build {
       "sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg",
       "sudo echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list",
       "sudo apt-get update",
-      "sudo apt-get install -y kubelet kubeadm kubectl",
-      "sudo apt-mark hold kubelet kubeadm kubectl",
+      "sudo apt-get install -y kubelet kubeadm",
+      "sudo apt-mark hold kubelet kubeadm",
       "sudo systemctl enable --now kubelet"
     ]
   }
@@ -41,25 +41,6 @@ build {
 
   provisioner "shell" {
     inline = ["sudo mv /tmp/containerd-config.toml /etc/containerd/config.toml"]
-  }
-
-  # Upload Kube Vip Manifest File configure HA Kube Api Server
-  provisioner "file" {
-    source = "kube-vip.yaml"
-    destination = "/tmp/kube-vip.yaml"
-  }
-
-  provisioner "shell" {
-    inline = ["sudo mv /tmp/kube-vip.yaml /etc/kubernetes/manifests/kube-vip.yaml"]
-  }
-
-  # Install Helm
-  provisioner "shell" {
-    inline = [
-      "curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3",
-      "chmod 700 get_helm.sh",
-      "./get_helm.sh"
-    ]
   }
 }
 
