@@ -1,4 +1,4 @@
-export GITHUB_TOKEN=<gh-token>
+GITHUB_TOKEN=<gh-token>
 flux bootstrap github \
   --token-auth \
   --owner=fdmsantos \

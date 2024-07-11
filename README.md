@@ -82,6 +82,22 @@ vagrant up
 
 [kube-vip requires super-admin.conf with Kubernetes](https://github.com/kube-vip/kube-vip/issues/684)
 
+#### Kube DNS Issue
+
+* Workaround
+
+```shell
+kubectl edit configmaps -n kube-system coredns
+# Replace "forward . /etc/resolv.conf" with "forward . 8.8.8.8"
+
+kubectl -n kube-system rollout restart deployment coredns
+```
+
+[Cilium Connectivity test using external dns lookups failing when bpf masquarade enabled in native routing mode](https://github.com/cilium/cilium/issues/32559)
+[External DNS not resolved in native routing](https://github.com/cilium/cilium/issues/29113)
+[https://github.com/cilium/cilium/issues/26010](https://github.com/cilium/cilium/issues/26010)
+[Medium Article](https://medium.com/@nahelou.j/play-with-cilium-native-routing-in-kind-cluster-5a9e586a81ca)
+
 ## Work In Progress
 
 * Configure Cluster with Ansible
