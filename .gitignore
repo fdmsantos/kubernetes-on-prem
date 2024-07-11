@@ -5,3 +5,6 @@
 # Ignore Packer generated files
 /cluster-deploy/output-master/
 /cluster-deploy/output-worker/
+
+# Environment Files
+.env

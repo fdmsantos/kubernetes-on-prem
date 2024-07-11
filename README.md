@@ -16,6 +16,7 @@ Setting up and running an on-prem or cloud agnostic Kubernetes cluster (Stacked 
 | CRI                   | containerd                                                                                                                        | 1.30.0       |
 | CNI                   | cillium                                                                                                                           | 1.15.6       |
 | CIS Benchmarks        | kube-bench                                                                                                                        | 0.8.0        |
+| GitOps                | fluxcd                                                                                                                            | 2.3.0        |
 
 ### Ip Management
 
@@ -35,14 +36,16 @@ Setting up and running an on-prem or cloud agnostic Kubernetes cluster (Stacked 
 
 * On `cluster-deploy` folder
 
-### Build VMS
+### VMS
+
+* Build
 
 ```shell
 packer init .
 packer build -force -parallel-builds=1 .  
 ```
 
-### Create VMS
+* Create
 
 ```shell
 vagrant plugin install vagrant-hosts
@@ -51,9 +54,19 @@ vagrant box add k8s-worker output-worker/package.box --force
 vagrant up
 ```
 
-### Configure VMS
+### Configure Cluster
 
-* k8s-master-01 => apply cluster/commands/first-master.sh
+* First Master
+  * run `first-master.sh`
+* Others Master
+  * run `others-master.sh`
+* Workers
+  * run `workers.sh`
+* Local Machine with kubeconfig configured
+  * run `deploy-cilium.sh`
+  * run `bootstrap-flux.sh` # Need change the values
+* For run Kube-Bench in all machines
+  * execute `kube-bench.sh`
 
 ## Usefully Links
 

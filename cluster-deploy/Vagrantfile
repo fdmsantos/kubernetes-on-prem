@@ -1,4 +1,4 @@
-BOX_MEM = ENV['BOX_MEM'] || "1024"
+BOX_MEM = ENV['BOX_MEM'] || "2048"
 BOX_CPU = ENV['BOX_CPU'] || "1"
 MASTER_BOX_NAME =  ENV['MASTER_BOX_NAME'] || "k8s-master"
 WORKER_BOX_NAME =  ENV['WORKER_BOX_NAME'] || "k8s-worker"

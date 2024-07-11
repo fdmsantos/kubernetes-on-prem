@@ -1,4 +1,5 @@
-sudo swapoff -a
+sudo nano /etc/fstab # Comment swap line
+sudo reboot
 sudo nano /etc/sysctl.conf # uncomment net.ipv4.ip_forward = 1
 sudo sysctl -p
 sudo sed -i 's#path: /etc/kubernetes/admin.conf#path: /etc/kubernetes/super-admin.conf#' /etc/kubernetes/manifests/kube-vip.yaml
