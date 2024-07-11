@@ -1,0 +1,14 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: robot-shop-gateway
+  namespace: robot-shop
+spec:
+  gatewayClassName: cillium
+  listeners:
+    - protocol: HTTP
+      port: 80
+      name: http-listener
+      allowedRoutes:
+        namespaces:
+          from: Same

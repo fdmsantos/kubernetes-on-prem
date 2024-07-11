@@ -5,4 +5,5 @@ helm install cilium cilium/cilium --version 1.15.6 \
     --namespace kube-system \
     --set kubeProxyReplacement=true \
     --set k8sServiceHost=${API_SERVER_IP} \
-    --set k8sServicePort=${API_SERVER_PORT}
+    --set k8sServicePort=${API_SERVER_PORT} \
+    --set gatewayAPI.enabled=true
