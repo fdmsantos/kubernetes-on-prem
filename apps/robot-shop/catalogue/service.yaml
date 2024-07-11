@@ -1,20 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbitmq
   labels:
-    service: rabbitmq
+    service: catalogue
+  name: catalogue
   namespace: robot-shop
 spec:
   ports:
-    - name: tcp-amqp
-      port: 5672
-      targetPort: 5672
-    - name: http-management
-      port: 15672
-      targetPort: 15672
-    - name: tcp-epmd
-      port: 4369
-      targetPort: 4369
+    - name: http
+      port: 8080
+      targetPort: 8080
   selector:
-    service: rabbitmq
+    service: catalogue
