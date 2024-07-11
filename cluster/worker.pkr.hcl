@@ -42,5 +42,16 @@ build {
   provisioner "shell" {
     inline = ["sudo mv /tmp/containerd-config.toml /etc/containerd/config.toml"]
   }
+
+  # Install Kube-Bench
+  provisioner "shell" {
+    inline = [
+      "sudo mkdir -p /opt/kube-bench",
+      "sudo curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.8.0/kube-bench_0.8.0_linux_amd64.tar.gz -o /opt/kube-bench.tar.gz",
+      "sudo tar -xvf /opt/kube-bench.tar.gz -C /opt/kube-bench",
+      "sudo mv /opt/kube-bench/kube-bench /usr/local/bin/",
+      "sudo rm /opt/kube-bench.tar.gz"
+    ]
+  }
 }
 
