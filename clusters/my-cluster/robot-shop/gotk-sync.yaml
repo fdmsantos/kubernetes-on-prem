@@ -4,7 +4,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: robot-shop
-  namespace: flux-system
+  namespace: robot-shop
 spec:
   interval: 10m0s
   path: ./apps/robot-shop
