@@ -4,6 +4,7 @@ metadata:
   name: mysql
   labels:
     service: mysql
+  namespace: robot-shop
 spec:
   replicas: 3
   selector:

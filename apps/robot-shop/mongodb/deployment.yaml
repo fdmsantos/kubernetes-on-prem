@@ -4,6 +4,7 @@ metadata:
   name: mongodb
   labels:
     service: mongodb
+  namespace: robot-shop
 spec:
   replicas: 3
   selector:
