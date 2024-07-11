@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalogue
+  name: dispatch
   labels:
-    service: catalogue
+    service: dispatch
+  namespace: robot-shop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: catalogue
+      service: dispatch
   template:
     metadata:
       labels:
-        service: catalogue
+        service: dispatch
     spec:
       containers:
-        - name: catalogue
-          image: robotshop/rs-catalogue:latest
+        - name: dispatch
+          image: robotshop/rs-dispatch:latest
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
           resources:
             limits:
               cpu: 200m

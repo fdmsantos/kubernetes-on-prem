@@ -8,3 +8,9 @@ resources:
 - redis
 - cart
 - catalogue
+- dispatch
+- payment
+- ratings
+- shipping
+- user
+- web
