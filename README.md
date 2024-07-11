@@ -15,6 +15,7 @@ Setting up and running an on-prem or cloud agnostic Kubernetes cluster (Stacked 
 | kube-apiserver LB     | Kube-Vip ARP                                                                                                                      | 0.4.0        |
 | CRI                   | containerd                                                                                                                        | 1.30.0       |
 | CNI                   | cillium                                                                                                                           | 1.15.6       |
+| CIS Benchmarks        | kube-bench                                                                                                                        | 0.8.0        |
 
 ### Ip Management
 
@@ -32,7 +33,7 @@ Setting up and running an on-prem or cloud agnostic Kubernetes cluster (Stacked 
 
 ## Deploy 
 
-* On `cluster` folder
+* On `cluster-deploy` folder
 
 ### Build VMS
 

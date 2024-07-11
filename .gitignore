@@ -3,5 +3,5 @@
 *.log
 
 # Ignore Packer generated files
-/cluster/output-master/
-/cluster/output-worker/
+/cluster-deploy/output-master/
+/cluster-deploy/output-worker/
