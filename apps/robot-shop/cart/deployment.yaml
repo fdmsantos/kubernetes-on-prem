@@ -1,31 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: cart
   labels:
-    service: mysql
+    service: cart
   namespace: robot-shop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: mysql
+      service: cart
   template:
     metadata:
       labels:
-        service: mysql
+        service: cart
     spec:
       containers:
-        - name: mysql
-          image: robotshop/rs-mysql-db:latest
+        - name: cart
+          image: robotshop/rs-cart:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 3306
+            - containerPort: 8080
           resources:
             limits:
               cpu: 200m
-              memory: 1024Mi
+              memory: 100Mi
             requests:
               cpu: 100m
-              memory: 700Mi
-      restartPolicy: Always
+              memory: 50M
