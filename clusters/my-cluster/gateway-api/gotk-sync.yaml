@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: robot-shop
+  name: gateway-controller
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./apps/robot-shop
+  path: ./infrastructure/gateway-controller
   prune: true
   sourceRef:
     kind: GitRepository
