@@ -6,8 +6,8 @@ metadata:
 spec:
   parentRefs:
     - name: robot-shop-gateway
-#  hostnames:
-#    - "example.com"
+  hostnames:
+    - "test.foo"
   rules:
     - backendRefs:
         - name: web

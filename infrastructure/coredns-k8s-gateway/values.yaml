@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
 
 # Delegated domain
-domain: "foo"
+domain: "example.com"
 
 # Labels to apply to all resources
 customLabels: {}
