@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: robot-shop-gateway
   hostnames:
-    - "test.foo"
+    - "robot-shop.example.com"
   rules:
     - backendRefs:
         - name: web
