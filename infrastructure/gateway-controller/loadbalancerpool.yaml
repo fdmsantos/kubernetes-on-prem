@@ -4,4 +4,4 @@ metadata:
   name: "pool"
 spec:
   cidrs:
-    - cidr: "20.0.10.0/24"
+    - cidr: "192.168.56.112/28"

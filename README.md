@@ -20,17 +20,18 @@ Setting up and running an on-prem or cloud agnostic Kubernetes cluster (Stacked 
 
 ### Ip Management
 
-| IP             | Function           |
-|----------------|--------------------|
-| 192.168.56.2   | k8s-master-01      |
-| 192.168.56.3   | k8s-master-02      |
-| 192.168.56.4   | k8s-master-03      |
-| 192.168.56.5   | k8s-worker-01      |
-| 192.168.56.6   | k8s-worker-02      |
-| 192.168.56.7   | k8s-worker-03      |
-| 192.168.56.100 | Kube-apiserver LB  |
-| 10.0.0.0/16    | Pod Network CIDR   |
-| 10.96.0.0/12   | Service Cluster IP |
+| IP                | Function                  |
+|-------------------|---------------------------|
+| 192.168.56.2      | k8s-master-01             |
+| 192.168.56.3      | k8s-master-02             |
+| 192.168.56.4      | k8s-master-03             |
+| 192.168.56.5      | k8s-worker-01             |
+| 192.168.56.6      | k8s-worker-02             |
+| 192.168.56.7      | k8s-worker-03             |
+| 192.168.56.100    | Kube-apiserver LB         |
+| 10.0.0.0/16       | Pod Network CIDR          |
+| 10.96.0.0/12      | Service Cluster IP        |
+| 192.168.56.112/28 | LoadBalancer External IPs |
 
 ## Deploy 
 
@@ -67,11 +68,6 @@ vagrant up
   * run `bootstrap-flux.sh` # Need change the values
 * For run Kube-Bench in all machines
   * execute `kube-bench.sh`
-* Configure Routes
-
-```shell
-sudo ip route add 20.0.10.0/24 dev vboxnet0
-```
 
 ## Usefully Links
 
