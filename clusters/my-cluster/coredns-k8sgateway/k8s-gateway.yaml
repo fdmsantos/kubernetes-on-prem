@@ -18,7 +18,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: k8s_gateway
+      chart: k8s_gateway/k8s-gateway
       version: '0.4.0'
       sourceRef:
         kind: HelmRepository
