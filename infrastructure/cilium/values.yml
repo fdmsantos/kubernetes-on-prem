@@ -3,3 +3,8 @@ k8sServiceHost: 192.168.56.100
 k8sServicePort: 6443
 gatewayAPI:
   enabled: true
+l2announcements:
+  enabled: true
+devices: eth1
+externalIPs:
+  enabled: true

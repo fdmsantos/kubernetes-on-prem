@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - crds.yaml
 - cilium-gateway-class.yaml
+- loadbalancerpool.yaml

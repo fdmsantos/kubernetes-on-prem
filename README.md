@@ -67,6 +67,11 @@ vagrant up
   * run `bootstrap-flux.sh` # Need change the values
 * For run Kube-Bench in all machines
   * execute `kube-bench.sh`
+* Configure Routes
+
+```shell
+sudo ip route add 20.0.10.0/24 dev vboxnet0
+```
 
 ## Usefully Links
 
