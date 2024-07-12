@@ -83,6 +83,7 @@ vagrant up
 
 [kube-vip requires super-admin.conf with Kubernetes](https://github.com/kube-vip/kube-vip/issues/684)
 [helm: possibility to control creation of GatewayClass](https://github.com/cilium/cilium/pull/33446)
+[gateway-api v1.1.0 standard-install breaks envoy-gateway and cilium-operator](https://github.com/kubernetes-sigs/gateway-api/issues/3075)
 
 #### Kube DNS Issue
 
