@@ -63,7 +63,7 @@ vagrant up
 * Workers
   * run `workers.sh`
 * Local Machine with kubeconfig configured
-  * run `deploy-cilium.sh`
+  * run `/infrastructure/deploy-cilium.sh`
   * run `bootstrap-flux.sh` # Need change the values
 * For run Kube-Bench in all machines
   * execute `kube-bench.sh`
@@ -81,6 +81,7 @@ vagrant up
 ### Issues To Follow
 
 [kube-vip requires super-admin.conf with Kubernetes](https://github.com/kube-vip/kube-vip/issues/684)
+[helm: possibility to control creation of GatewayClass](https://github.com/cilium/cilium/pull/33446)
 
 #### Kube DNS Issue
 
