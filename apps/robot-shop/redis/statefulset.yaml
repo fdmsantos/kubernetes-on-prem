@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         service: redis
+        app.kubernetes.io/name: redis
     spec:
       containers:
         - name: redis

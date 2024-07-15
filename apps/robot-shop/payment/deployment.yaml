@@ -17,6 +17,7 @@ spec:
       labels:
         service: payment
         stage: prod
+        app.kubernetes.io/name: payment
     spec:
       containers:
         - name: payment

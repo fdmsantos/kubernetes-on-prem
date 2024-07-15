@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         service: user
+        app.kubernetes.io/name: user
     spec:
       containers:
         - name: user

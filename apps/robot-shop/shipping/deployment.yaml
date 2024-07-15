@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         service: shipping
+        app.kubernetes.io/name: shipping
     spec:
       containers:
         - name: shipping

@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         service: dispatch
+        app.kubernetes.io/name: dispatch
     spec:
       containers:
         - name: dispatch
