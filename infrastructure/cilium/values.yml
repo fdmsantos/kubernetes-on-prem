@@ -8,3 +8,12 @@ l2announcements:
 devices: eth1
 externalIPs:
   enabled: true
+encryption:
+  enabled: true
+  type: wireguard
+  nodeEncryption: true
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
