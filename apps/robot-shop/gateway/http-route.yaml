@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: robot-shop-gateway
   hostnames:
-    - "robot-shop.example.com"
+    - "robot-shop.fabiosantos.cloudns.be"
   rules:
     - backendRefs:
         - name: web
