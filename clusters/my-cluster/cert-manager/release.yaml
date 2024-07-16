@@ -26,3 +26,4 @@ spec:
       enabled: true
     extraArgs:
       - "--enable-gateway-api"
+      - "--acme-http01-solver-nameservers=192.168.56.114:53"

@@ -15,7 +15,7 @@ spec:
       name: http-listener
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
     - name: http
       hostname: robot-shop.fabiosantos.cloudns.be
       port: 443
