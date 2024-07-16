@@ -5,6 +5,8 @@ metadata:
   namespace: robot-shop
   labels:
     app.kubernetes.io/name: robot-shop-gateway
+  annotations:
+    cert-manager.io/issuer: letsencrypt-staging
 spec:
   gatewayClassName: cilium
   listeners:
@@ -14,3 +16,11 @@ spec:
       allowedRoutes:
         namespaces:
           from: Same
+    - name: http
+      hostname: robot-shop.fabiosantos.cloudns.be
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: robot-shop-cert-tls
