@@ -17,6 +17,6 @@ spec:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-            - name: robot-shop
+            - name: robot-shop-gateway
               namespace: robot-shop
               kind: Gateway
