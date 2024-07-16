@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: hashicorp/vault
+      chart: vault
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
