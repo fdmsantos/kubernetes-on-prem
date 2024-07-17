@@ -24,12 +24,23 @@ spec:
   values:
     server:
       affinity: ""
+      auditStorage:
+        enabled: true
+      standalone:
+        enabled: false
+      ui:
+        enabled: true
+        serviceType: "LoadBalancer"
+        serviceNodePort: null
+        externalPort: 8200
       ha:
         enabled: true
+        replicas: 3
         raft:
           enabled: true
           setNodeId: true
           config: |
+            ui = true
             cluster_name = "vault-integrated-storage"
             storage "raft" {
                path    = "/vault/data/"
