@@ -24,6 +24,5 @@ spec:
   values:
     persistence:
       enabled: true
-    service:
-      type: LoadBalancer
-      loadBalancerClass: cilium
+    ingress:
+      enabled: true
