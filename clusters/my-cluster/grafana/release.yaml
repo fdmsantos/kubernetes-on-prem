@@ -1,23 +1,26 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: prometheus-community
+  name: grafana
   namespace: flux-system
 spec:
   chart:
     spec:
-      chart: prometheus
+      chart: grafana
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
+        name: grafana
         namespace: flux-system
-      version: 25.24.0
+      version: 8.3.4
   install:
     createNamespace: true
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
   interval: 1m0s
-  releaseName: prometheus
+  releaseName: grafana
   targetNamespace: monitoring
+  values:
+    persistence:
+      enabled: true
