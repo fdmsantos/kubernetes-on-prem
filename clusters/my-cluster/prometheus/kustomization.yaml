@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - repo.yaml
 - release.yaml
+- prometheus-pv.yaml
+- prometheus-alertmanager-pv.yaml
