@@ -26,8 +26,6 @@ spec:
       affinity: ""
       auditStorage:
         enabled: true
-      standalone:
-        enabled: false
       ui:
         enabled: true
         serviceType: "LoadBalancer"
