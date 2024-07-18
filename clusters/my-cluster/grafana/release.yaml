@@ -28,3 +28,12 @@ spec:
       enabled: true
     service:
       type: LoadBalancer
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        provider:
+          disableDelete: true
+          allowUiUpdates: false
+          foldersFromFilesStructure: true
+          folderAnnotation: grafana_dashboard_folder
