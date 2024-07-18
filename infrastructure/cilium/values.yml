@@ -12,16 +12,38 @@ encryption:
   enabled: true
   type: wireguard
   nodeEncryption: true
+operator:
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 hubble:
   relay:
     enabled: true
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: true
   ui:
     enabled: true
   metrics:
-    enabled: {dns,drop,tcp,flow,port-distribution,icmp,httpV2:exemplars=true;labelsContext=source_ip\,source_namespace\,source_workload\,destination_ip\,destination_namespace\,destination_workload\,traffic_direction}
+    serviceMonitor:
+      enabled: true
     enableOpenMetrics: true
+    enabled:
+     - dns
+     - drop
+     - tcp
+     - flow
+     - port-distribution
+     - icmp
+     - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
+    dashboards:
+      enabled: true
+      namespace: monitoring
+      annotations:
+        grafana_folder: "Hubble"
 prometheus:
   enabled: true
-operator:
-  prometheus:
+  serviceMonitor:
     enabled: true
