@@ -4,3 +4,4 @@ resources:
 - repo.yaml
 - release.yaml
 - grafana-pv.yaml
+- dashboards

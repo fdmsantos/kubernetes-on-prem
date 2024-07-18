@@ -32,8 +32,8 @@ spec:
       dashboards:
         enabled: true
         label: grafana_dashboard
+        folderAnnotation: grafana_dashboard_folder
         provider:
           disableDelete: true
           allowUiUpdates: false
           foldersFromFilesStructure: true
-          folderAnnotation: grafana_dashboard_folder
