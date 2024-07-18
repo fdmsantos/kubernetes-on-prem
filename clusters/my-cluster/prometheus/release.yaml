@@ -22,6 +22,12 @@ spec:
   releaseName: prometheus
   targetNamespace: monitoring
   values:
+    kube-state-metrics:
+      enabled: false
+    prometheus-node-exporter:
+      enabled: false
+    alertmanager:
+      enabled: false
     extraScrapeConfigs: |
       - job_name: 'kubernetes-cilium-pods'
         kubernetes_sd_configs:
