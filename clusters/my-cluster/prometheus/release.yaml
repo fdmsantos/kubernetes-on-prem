@@ -23,7 +23,7 @@ spec:
   targetNamespace: monitoring
   values:
     kube-state-metrics:
-      enabled: false
+      enabled: true
     prometheus-node-exporter:
       enabled: true
     alertmanager:
