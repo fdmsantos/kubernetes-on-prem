@@ -22,6 +22,9 @@ spec:
   releaseName: prometheus
   targetNamespace: monitoring
   values:
+    server:
+      ingres:
+        enabled: true
     kube-state-metrics:
       enabled: false
     prometheus-node-exporter:
