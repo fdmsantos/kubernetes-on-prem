@@ -28,6 +28,10 @@ spec:
       enabled: false
     alertmanager:
       enabled: false
+    prometheus-pushgateway:
+      enabled: false
+    extraArgs:
+        - --log.level=info
 #    extraScrapeConfigs: |
 #      - job_name: 'g'
 #        kubernetes_sd_configs:
