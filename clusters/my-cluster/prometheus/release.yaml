@@ -25,6 +25,8 @@ spec:
     server:
       ingress:
         enabled: true
+        hosts:
+          - prometheus.example.com
     kube-state-metrics:
       enabled: false
     prometheus-node-exporter:
