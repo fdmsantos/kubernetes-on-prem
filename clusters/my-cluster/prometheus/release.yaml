@@ -23,38 +23,38 @@ spec:
   targetNamespace: monitoring
   values:
     kube-state-metrics:
-      enabled: true
+      enabled: false
     prometheus-node-exporter:
-      enabled: true
+      enabled: false
     alertmanager:
       enabled: false
     prometheus-pushgateway:
       enabled: false
     extraArgs:
         - --log.level=debug
-#    extraScrapeConfigs: |
-#      - job_name: 'g'
-#        kubernetes_sd_configs:
-#          - role: pod
-#        relabel_configs:
-#          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-#            action: keep
-#            regex: true
-#          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-#            action: replace
-#            regex: ([^:]+)(?::\d+)?;(\d+)
-#            replacement: ${1}:${2}
-#            target_label: __address__
-#      - job_name: 'kubernetes-endpoints'
-#        scrape_interval: 30s
-#        kubernetes_sd_configs:
-#          - role: endpoints
-#        relabel_configs:
-#          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-#            action: keep
-#            regex: true
-#          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
-#            action: replace
-#            target_label: __address__
-#            regex: (.+)(?::\d+);(\d+)
-#            replacement: $1:$2
+    extraScrapeConfigs: |
+      - job_name: 'kubernetes-pods-cilium'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: ${1}:${2}
+            target_label: __address__
+      - job_name: 'kubernetes-endpoints-cilium'
+        scrape_interval: 30s
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            target_label: __address__
+            regex: (.+)(?::\d+);(\d+)
+            replacement: $1:$2
