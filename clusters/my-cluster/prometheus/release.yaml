@@ -31,7 +31,7 @@ spec:
     prometheus-pushgateway:
       enabled: false
     extraArgs:
-        - --log.level=info
+        - --log.level=debug
 #    extraScrapeConfigs: |
 #      - job_name: 'g'
 #        kubernetes_sd_configs:
