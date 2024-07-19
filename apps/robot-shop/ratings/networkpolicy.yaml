@@ -1,37 +1,28 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: user-np
+  name: ratings-np
   namespace: robot-shop
 spec:
-  description: "Allow connection from WEB"
+  description: "Allow connection to ratings"
   endpointSelector:
     matchLabels:
-      service: user
+      service: ratings
   ingress:
     - fromEndpoints:
       - matchLabels:
           service: web
-      - matchLabels:
-          service: payment
       toPorts:
         - ports:
-            - port: "8080"
+            - port: "80"
               protocol: TCP
           rules:
             http: [ { } ]
   egress:
     - toEndpoints:
-      - matchLabels:
-          service: redis
-      toPorts:
-        - ports:
-          - port: "6379"
-            protocol: TCP
-    - toEndpoints:
         - matchLabels:
-            service: mongodb
+            service: mysql
       toPorts:
         - ports:
-            - port: "27017"
+            - port: "3306"
               protocol: TCP

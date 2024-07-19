@@ -5,3 +5,4 @@ resources:
 - release.yaml
 - grafana-pv.yaml
 - dashboards
+- l7-visibility.yaml

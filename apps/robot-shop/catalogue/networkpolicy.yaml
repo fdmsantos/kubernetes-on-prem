@@ -1,19 +1,17 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: user-np
+  name: catalogue-np
   namespace: robot-shop
 spec:
-  description: "Allow connection from WEB"
+  description: "Allow connection to catalogue"
   endpointSelector:
     matchLabels:
-      service: user
+      service: catalogue
   ingress:
     - fromEndpoints:
       - matchLabels:
           service: web
-      - matchLabels:
-          service: payment
       toPorts:
         - ports:
             - port: "8080"
@@ -21,13 +19,6 @@ spec:
           rules:
             http: [ { } ]
   egress:
-    - toEndpoints:
-      - matchLabels:
-          service: redis
-      toPorts:
-        - ports:
-          - port: "6379"
-            protocol: TCP
     - toEndpoints:
         - matchLabels:
             service: mongodb
