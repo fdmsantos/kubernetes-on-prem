@@ -23,7 +23,7 @@ spec:
   targetNamespace: monitoring
   values:
     server:
-      ingres:
+      ingress:
         enabled: true
     kube-state-metrics:
       enabled: false
