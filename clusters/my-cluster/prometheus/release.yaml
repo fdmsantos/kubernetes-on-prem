@@ -27,6 +27,8 @@ spec:
         enabled: true
         hosts:
           - prometheus.example.com
+      service:
+        type: LoadBalancer
     kube-state-metrics:
       enabled: false
     prometheus-node-exporter:
