@@ -38,7 +38,7 @@ spec:
     prometheus-pushgateway:
       enabled: false
     extraArgs:
-        - --log.level=debug
+      - --log.level=debug
     extraScrapeConfigs: |
       - job_name: 'kubernetes-pods-cilium'
         kubernetes_sd_configs:
