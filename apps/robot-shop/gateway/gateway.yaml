@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: robot-shop-gateway
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
 spec:
   gatewayClassName: cilium
   listeners:
