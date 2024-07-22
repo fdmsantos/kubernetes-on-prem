@@ -6,13 +6,13 @@ metadata:
 spec:
   chart:
     spec:
-      chart: prometheus
+      chart: kube-prometheus-stack
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-      version: 25.24.0
+      version: 61.3.2
   install:
     createNamespace: true
     crds: CreateReplace
@@ -22,46 +22,45 @@ spec:
   releaseName: prometheus
   targetNamespace: monitoring
   values:
-    server:
+    fullnameOverride: prometheus
+
+    prometheus:
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+
+        enableRemoteWriteReceiver: true
+        enableFeatures:
+          - exemplar-storage
+        ingress:
+          enabled: true
+          hosts:
+            - prometheus.example.com
+        service:
+          type: LoadBalancer
+    alertmanager:
+      enabled: false
+    grafana:
+      enabled: true
+      serviceMonitor:
+        enabled: true
       ingress:
         enabled: true
         hosts:
-          - prometheus.example.com
-      service:
-        type: LoadBalancer
-    kube-state-metrics:
+          - grafana.example.com
+
+      persistence:
+        enabled: true
+
+      adminUser: admin
+      adminPassword: password
+
+      sidecar:
+        dashboards:
+          folderAnnotation: grafana_folder
+          provider:
+            foldersFromFilesStructure: true
+    nodeExporter:
       enabled: false
-    prometheus-node-exporter:
-      enabled: false
-    alertmanager:
-      enabled: false
-    prometheus-pushgateway:
-      enabled: false
-    extraArgs:
-      - --log.level=debug
-    extraScrapeConfigs: |
-      - job_name: 'kubernetes-pods-cilium'
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-            action: keep
-            regex: true
-          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-            action: replace
-            regex: ([^:]+)(?::\d+)?;(\d+)
-            replacement: ${1}:${2}
-            target_label: __address__
-      - job_name: 'kubernetes-endpoints-cilium'
-        scrape_interval: 30s
-        kubernetes_sd_configs:
-          - role: endpoints
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
-            action: keep
-            regex: true
-          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
-            action: replace
-            target_label: __address__
-            regex: (.+)(?::\d+);(\d+)
-            replacement: $1:$2
