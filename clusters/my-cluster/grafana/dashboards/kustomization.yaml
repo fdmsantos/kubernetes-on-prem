@@ -1,5 +1,0 @@
-resources:
-- cilium-dashboard.yaml
-- cilium-operator-dashboard.yaml
-- hubble-dashboard.yaml
-- hubble-l7-http-metrics-by-workload.yaml
