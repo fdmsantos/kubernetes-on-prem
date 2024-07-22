@@ -64,3 +64,5 @@ spec:
             foldersFromFilesStructure: true
     nodeExporter:
       enabled: false
+    kubelet:
+      enabled: false
