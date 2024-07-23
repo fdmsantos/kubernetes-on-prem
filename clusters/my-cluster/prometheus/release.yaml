@@ -23,7 +23,6 @@ spec:
   targetNamespace: monitoring
   values:
     fullnameOverride: prometheus
-
     prometheus:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
@@ -66,3 +65,7 @@ spec:
       enabled: false
     kubelet:
       enabled: false
+
+
+#prometheus.networkPolicy.enabled
+#prometheus.networkPolicy.flavor   "cilium"
