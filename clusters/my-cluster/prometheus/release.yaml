@@ -67,6 +67,9 @@ spec:
           folderAnnotation: grafana_folder
           provider:
             foldersFromFilesStructure: true
+        datasources:
+          alertmanager:
+            enabled: false
 
     nodeExporter:
       enabled: false
