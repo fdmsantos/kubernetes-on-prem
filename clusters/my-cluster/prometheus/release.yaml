@@ -18,6 +18,7 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+    createNamespace: true
   interval: 1m0s
   releaseName: prometheus
   targetNamespace: monitoring
