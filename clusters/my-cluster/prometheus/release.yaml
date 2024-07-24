@@ -65,6 +65,8 @@ spec:
       enabled: false
     kubelet:
       enabled: false
+    kube-state-metrics:
+      enabled: false
 
 
 #prometheus.networkPolicy.enabled
