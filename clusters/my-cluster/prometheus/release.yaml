@@ -52,6 +52,9 @@ spec:
         hosts:
           - grafana.example.com
 
+      service:
+        type: LoadBalancer
+
       persistence:
         enabled: false
 
