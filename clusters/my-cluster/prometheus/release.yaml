@@ -60,16 +60,20 @@ spec:
 
       adminUser: admin
       adminPassword: password
+      defaultDashboardsEnabled: false
 
       sidecar:
         dashboards:
           folderAnnotation: grafana_folder
           provider:
             foldersFromFilesStructure: true
+
     nodeExporter:
       enabled: false
+
     kubelet:
       enabled: false
+
     kubeStateMetrics:
       enabled: false
 
