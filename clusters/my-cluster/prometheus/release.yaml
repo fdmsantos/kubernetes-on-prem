@@ -33,14 +33,16 @@ spec:
         enableRemoteWriteReceiver: true
         enableFeatures:
           - exemplar-storage
-        ingress:
-          enabled: true
-          hosts:
-            - prometheus.example.com
-        service:
-          type: LoadBalancer
+      ingress:
+        enabled: true
+        hosts:
+          - prometheus.example.com
+      service:
+        type: LoadBalancer
+
     alertmanager:
       enabled: false
+
     grafana:
       enabled: true
       serviceMonitor:
