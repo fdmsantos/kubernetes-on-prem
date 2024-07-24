@@ -65,7 +65,7 @@ spec:
       enabled: false
     kubelet:
       enabled: false
-    kube-state-metrics:
+    kubeStateMetrics:
       enabled: false
 
 
