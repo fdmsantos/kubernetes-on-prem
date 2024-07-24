@@ -51,7 +51,7 @@ spec:
           - grafana.example.com
 
       persistence:
-        enabled: true
+        enabled: false
 
       adminUser: admin
       adminPassword: password
