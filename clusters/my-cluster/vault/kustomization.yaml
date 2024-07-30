@@ -5,4 +5,3 @@ resources:
 - release.yaml
 - vault-pv-0.yaml
 - vault-pv-1.yaml
-- vault-pv-2.yaml
