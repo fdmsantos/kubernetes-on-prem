@@ -49,7 +49,7 @@ spec:
         vault.hashicorp.com/role: 'wordpress-app'
         vault.hashicorp.com/agent-inject-secret-mysql: 'database/creds/wordpress-mysql'
         vault.hashicorp.com/agent-inject-template-mysql: |
-          {{ with secret "database/creds/wordpress-mysql -}}
+          {{ with secret "database/creds/wordpress-mysql" -}}
             export WORDPRESS_DB_PASSWORD="{{ .Data.password }}"
             export WORDPRESS_DB_USER="{{ .Data.username }}"
           {{- end }}
