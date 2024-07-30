@@ -45,6 +45,7 @@ spec:
         tier: frontend
       annotations:
         # Environment variable export template
+        vault.hashicorp.com/agent-inject: true
         vault.hashicorp.com/agent-inject-secret-mysql: 'database/creds/wordpress-mysql'
         vault.hashicorp.com/agent-inject-template-mysql: |
           {{ with secret "database/creds/wordpress-mysql -}}
