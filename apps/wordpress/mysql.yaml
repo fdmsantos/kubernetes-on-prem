@@ -51,7 +51,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: rootpassword
             - name: MYSQL_ROOT_HOST
-              value: %
+              value: "%"
           livenessProbe:
             tcpSocket:
               port: 3306
