@@ -69,6 +69,27 @@ vagrant up
 * For run Kube-Bench in all machines
   * execute `kube-bench.sh`
 
+### Vault Configuration
+
+[Ha With Raft](https://developer.hashicorp.com/vault/docs/platform/k8s/helm/examples/ha-with-raft)
+
+* Unseal Vault
+
+```shell
+kubectl exec -ti vault-0 -n vault -- vault operator init 
+kubectl exec -ti vault-0 -n vault -- vault operator unseal
+```
+
+* Join HA Cluster
+
+```shell
+kubectl exec -ti vault-1 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -ti vault-1 -n vault -- vault operator unseal
+```
+
+
+
+
 ## Usefully Links
 
 ### HA Cluster
