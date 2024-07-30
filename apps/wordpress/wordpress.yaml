@@ -62,7 +62,7 @@ spec:
             - name: WORDPRESS_DB_HOST
               value: wordpress-mysql
             - name: BASH_ENV
-              value: /vault/secrets/config
+              value: /vault/secrets/mysql
           ports:
             - containerPort: 80
               name: wordpress
