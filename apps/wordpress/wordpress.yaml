@@ -46,6 +46,7 @@ spec:
       annotations:
         # Environment variable export template
         vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: 'wordpress-app'
         vault.hashicorp.com/agent-inject-secret-mysql: 'database/creds/wordpress-mysql'
         vault.hashicorp.com/agent-inject-template-mysql: |
           {{ with secret "database/creds/wordpress-mysql -}}
@@ -53,6 +54,7 @@ spec:
             export WORDPRESS_DB_USER="{{ .Data.username }}"
           {{- end }}
     spec:
+      serviceAccountName: wordpress-app
       containers:
         - image: wordpress:6.2.1-apache
           name: wordpress

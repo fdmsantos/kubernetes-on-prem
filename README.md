@@ -87,8 +87,47 @@ kubectl exec -ti vault-1 -n vault -- vault operator raft join http://vault-0.vau
 kubectl exec -ti vault-1 -n vault -- vault operator unseal
 ```
 
+* Configure Mysql
+
+```sh
+vault write database/config/wordpress-mysql \
+plugin_name=mysql-legacy-database-plugin \
+connection_url="{{username}}:{{password}}@tcp(wordpress-mysql.wordpress:3306)/" \
+allowed_roles="wordpress-mysql" \
+username="root" \
+password="rootpassword"
+
+vault write database/roles/wordpress-mysql \
+db_name=wordpress-mysql \
+creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" \
+default_ttl="1h" \
+max_ttl="24h"
+```
+
+* Configure Kubernetes Authentication
+
+[Link](https://medium.com/@seifeddinerajhi/securely-inject-secrets-to-pods-with-the-vault-agent-injector-3238eb774342)
+
+```shell
+vault write auth/kubernetes/config \
+token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
 
+vault policy write wordpress-app - <<EOF
+path "database/creds/wordpress-mysql" {
+  capabilities = ["read"]
+}
+EOF
+
+
+vault write auth/kubernetes/role/wordpress-app \
+bound_service_account_names=wordpress-app \
+bound_service_account_namespaces=wordpress \
+policies=wordpress-app \
+ttl=24h
+```
 
 ## Usefully Links
 
